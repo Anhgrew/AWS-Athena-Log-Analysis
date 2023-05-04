@@ -21,5 +21,5 @@ cat <name_file>.csv | csvq -o analysis-result.csv 'select count(*), DATETIME_FOR
 
 ####
 ==> then run script to get all outputs(all existed or not key in buckets)
-python3 check_existed_s3_object.py analysis-result.cs 
+python3 check_existed_s3_object.py analysis-result.csv
 ```
