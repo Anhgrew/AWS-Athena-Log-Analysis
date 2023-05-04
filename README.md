@@ -14,7 +14,12 @@ AND
 parse_datetime('2023-05-04T11:00:00Z','yyyy-MM-dd''T''HH:mm:ss''Z')
 ORDER BY eventtime DESC;
 
+####
 ==> Download csv file and analyse 
 
 cat <name_file>.csv | csvq -o analysis-result.csv 'select count(*), DATETIME_FORMAT(eventtime, "%Y-%m-%d") as Date, useridentity as UserIdentity, eventname as Method, JSON_VALUE("bucketName", requestparameters) as BucketName, JSON_VALUE("key", requestparameters) as Key from stdin where account_id = "<id>" and recipientaccountid = "<id>" group by eventtime, useridentity, eventname, requestparameters'
+
+####
+==> then run script to get all outputs(all existed or not key in buckets)
+python3 check_existed_s3_object.py analysis-result.cs 
 ```
